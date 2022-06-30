@@ -1,0 +1,45 @@
+﻿@model PizzaModel
+@*
+*@
+@{
+}
+@{
+    var imagePath = "/images/Pizzas/" + (@Model.ImageTitle + ".png");
+    var modelParams = new Dictionary<string, string>
+    {
+        { "PizzaName", Model.PizzaName },
+        { "ImageTitle", Model.ImageTitle },
+        { "BasePrice", Model.BasePrice.ToString() },
+        { "TomatoSauce", Model.TomatoSauce.ToString() },
+        { "Cheese", Model.Cheese.ToString() },
+        { "Pepperoni", Model.Pepperoni.ToString() },
+        { "Tuna", Model.Tuna.ToString() },
+        { "Mushrooms", Model.Mushrooms.ToString() },
+        { "FinalPrice", Model.FinalPrice.ToString() }
+    };
+}
+
+<h1>Checkout Page</h1>
+
+<div class="card">
+    <div class="card-header text-uppercase font-weight-bold">
+        <img class="checkout-img" src=@imagePath />
+        <b>@Model.PizzaName</b>
+    </div>
+    <div class="card-body">
+        <h4>Toppings:</h4>
+        <br />
+        <ul>
+            <li>Cheese: @(Model.Cheese == true ? "Yes" : "No")</li>
+            <li>Tomato Sauce: @(Model.TomatoSauce == true ? "Yes" : "No")</li>
+            <li>Tuna: @(Model.Tuna == true ? "Yes" : "No")</li>
+            <li>Pepperoni: @(Model.Pepperoni == true ? "Yes" : "No")</li>
+            <li>Pineapple: @(Model.Pineapple == true ? "Yes" : "No")</li>
+            <li>Mushrooms: @(Model.Mushrooms == true ? "Yes" : "No")</li>
+        </ul>
+    </div>
+    <div class="card-footer">
+        <h4>Final Price: £@Model.FinalPrice</h4>
+    </div>
+</div>
+<a class="btn btn-primary col-2 mt-3" asp-area="" asp-controller="Checkout" asp-action="ThankYou" asp-all-route-data="@modelParams">Confirm Order</a>

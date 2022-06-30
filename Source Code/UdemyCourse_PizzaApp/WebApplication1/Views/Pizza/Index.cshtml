@@ -1,0 +1,59 @@
+﻿@model List<PizzaModel>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<div class="text-center">
+    <div class="main-text mt-0">
+        <h1 class="display-4 text-black">Choose a pizza</h1>
+        <h4>You can also create a custom pizza!</h4>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mb-5 mt-5">
+                <div class="w-100 row custom-div">
+                    <div class="col-4">
+                        <img src="~/images/Pizzas/Create.png" class="w-100" />
+                    </div>
+                    <div class="col-8 align-items-center">
+                        <div class="align-middle custom-text">
+                            <h2 style="text-align:center;">Create your own Pizza</h2>
+                            <h5 style="text-align: center;">Make your own Pizza with our Pizza builder!</h5>
+                            <a class="btn btn-danger mt-4" asp-area="" asp-controller="Pizza" asp-action="Custom">Create</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @foreach (var pizza in Model)
+            {
+                var imagePath = "/images/Pizzas/" + (pizza.ImageTitle + ".png");
+                var modelParams = new Dictionary<string, string>
+                {
+                    { "PizzaName", pizza.PizzaName },
+                    { "ImageTitle", pizza.ImageTitle },
+                    { "BasePrice", pizza.BasePrice.ToString() },
+                    { "TomatoSauce", pizza.TomatoSauce.ToString() },
+                    { "Cheese", pizza.Cheese.ToString() },
+                    { "Pepperoni", pizza.Pepperoni.ToString() },
+                    { "Tuna", pizza.Tuna.ToString() },
+                    { "Mushrooms", pizza.Mushrooms.ToString() },
+                    { "FinalPrice", pizza.FinalPrice.ToString() }
+                };
+                <div class="col-4 mb-5 card p-0 m-3">
+                    <div class="card-header">
+                        @pizza.PizzaName
+                    </div>
+                    <div class="card-body">
+                        <img src="@imagePath" class="menu-img" />
+                        <h4 class="pt-2">£@pizza.FinalPrice</h4>
+                    </div>
+                    <div class="card-footer">
+                        <a class="btn btn-primary mt-1" asp-area="" asp-controller="Checkout" asp-action="Index" asp-all-route-data="@modelParams" asp>Order Now</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
