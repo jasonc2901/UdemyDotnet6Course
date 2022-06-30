@@ -1,0 +1,20 @@
+﻿@model HotelBooking
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div class="card">
+    <div class="card-header">
+        @Model.Id
+    </div>
+    <div class="card-body">
+        Guest Name: @Model.GuestName <br />
+        Checkin Date/Time: @Model.DateStart <br />
+        Checkout Date/Time: @Model.DateEnd <br />
+    </div>
+    <div class="card-footer">
+        Booking reference: #13787
+    </div>
+</div>
